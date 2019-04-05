@@ -1,0 +1,18 @@
+---
+- name: Gather Cisco IOS/IOSXE Inventory Facts
+  gather_facts: false
+  hosts: all
+  tasks:
+  
+    - name: Collect Facts
+      ios_facts:
+        gather_subset: 
+          - "!config"
+      register: facts
+
+    - name: Print JSON
+      debug:
+              msg: "{{inventory_hostname}} Version {{ansible_net_version}}"
+
+   
+   
