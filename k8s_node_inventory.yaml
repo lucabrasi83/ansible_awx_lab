@@ -1,0 +1,8 @@
+---
+- name: Collect Kubernetes Nodes Facts
+  gather_facts: yes
+  hosts: all
+  tasks:
+    - name: Print Test message
+      debug:
+          msg: "Hello World"
