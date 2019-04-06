@@ -1,0 +1,11 @@
+---
+- name: Install Package via APT
+  gather_facts: false
+  hosts: all
+  tasks:
+     - name: APT Package Installation
+       apt:
+           force_apt_get: yes # not required. Force usage of apt-get instead of aptitude
+           name: "{{ APT_PACKAGE_NAME }}" # not required. A list of package names, like C(foo), or package specifier with version, like C(foo=1.0). Name wildcards (fnmatch) like C(apt*) and version wildcards like C(foo=1.0*) are also supported.
+           state: present # not required. choices: absent;build-dep;latest;present. Indicates the desired package state. C(latest) ensures that the latest version is installed. C(build-dep) ensures the package build dependencies are installed.
+           
