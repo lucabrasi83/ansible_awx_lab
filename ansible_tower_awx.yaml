@@ -11,7 +11,7 @@
         tower_password: "{{ AWX_PASSWORD }}"
         job_template: "{{ AWX_JOB_TEMPLATE_NAME }}"
         inventory: "Cisco Lab Inventory"
-        credential: ""
+        credential: "Demo Credential"
 
       register: job
 
