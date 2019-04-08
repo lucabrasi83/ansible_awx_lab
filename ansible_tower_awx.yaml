@@ -10,6 +10,8 @@
         tower_username: "{{ AWX_USERNAME }}"
         tower_password: "{{ AWX_PASSWORD }}"
         job_template: "{{ AWX_JOB_TEMPLATE_NAME }}"
+        inventory: "Cisco Lab Inventory"
+
       register: job
 
     - name: Wait for job max 30s
