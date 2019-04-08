@@ -6,11 +6,17 @@
 
     - name: Launch Job
       tower_job_launch:
-      job_template: "{{ AWX_JOB_TEMPLATE_NAME }}"
+        tower_host: "{{ AWX_HOSTNAME }}"
+        tower_username: "{{ AWX_USERNAME }}"
+        tower_password: "{{ AWX_PASSWORD }}"
+        job_template: "{{ AWX_JOB_TEMPLATE_NAME }}"
       register: job
 
     - name: Wait for job max 30s
       tower_job_wait:
-      job_id: job.id
+        tower_host: "{{ AWX_HOSTNAME }}"
+        tower_username: "{{ AWX_USERNAME }}"
+        tower_password: "{{ AWX_PASSWORD }}"
+        job_id: job.id
       timeout: 30
 ...
