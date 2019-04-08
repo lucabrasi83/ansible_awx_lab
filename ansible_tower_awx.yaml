@@ -18,5 +18,5 @@
         tower_username: "{{ AWX_USERNAME }}"
         tower_password: "{{ AWX_PASSWORD }}"
         job_id: job.id
-      timeout: 30
+        timeout: 30
 ...
