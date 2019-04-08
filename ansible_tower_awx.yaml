@@ -1,0 +1,16 @@
+---
+- name: Launch Job From Ansible Tower to AWX
+  hosts: localhost
+  gather_facts: false
+  tasks:
+
+    - name: Launch Job
+      tower_job_launch:
+      job_template: "{{ AWX_JOB_TEMPLATE_NAME }}"
+      register: job
+
+    - name: Wait for job max 30s
+      tower_job_wait:
+      job_id: job.id
+      timeout: 30
+...
