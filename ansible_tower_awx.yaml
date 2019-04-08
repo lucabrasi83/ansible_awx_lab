@@ -6,9 +6,6 @@
 
     - name: Launch Job
       tower_job_launch:
-        # tower_host: "{{ AWX_HOSTNAME }}"
-        # tower_username: "{{ AWX_USERNAME }}"
-        # tower_password: "{{ AWX_PASSWORD }}"
         job_template: "{{ AWX_JOB_TEMPLATE_NAME }}"
         inventory: "Cisco Lab Inventory"
         credential: "Demo Credential"
@@ -21,9 +18,6 @@
 
     - name: Wait for job max 30s
       tower_job_wait:
-        # tower_host: "{{ AWX_HOSTNAME }}"
-        # tower_username: "{{ AWX_USERNAME }}"
-        # tower_password: "{{ AWX_PASSWORD }}"
-        job_id: job.id
+        job_id: "{{ job.id }}"
         timeout: 30
 ...
