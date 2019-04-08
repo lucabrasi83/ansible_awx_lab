@@ -17,7 +17,7 @@
         job_id: "{{ job.id }}"
         timeout: 30
       
-        register: results
+      register: results
 
     - name: Print Job Results
       debug:
