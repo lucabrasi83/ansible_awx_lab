@@ -12,12 +12,14 @@
 
       register: job
     
-    - name: Print Job Details
-      debug:
-        msg: Job Details "{{ job }}"
-
     - name: Wait for job max 30s
       tower_job_wait:
         job_id: "{{ job.id }}"
         timeout: 30
+      
+        register: results
+
+    - name: Print Job Results
+      debug:
+        msg: AWX Job "{{ results.id }}" Status: "{{ results.status }}" Took: "{{ results.elapsed }}" seconds 
 ...
