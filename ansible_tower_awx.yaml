@@ -6,20 +6,24 @@
 
     - name: Launch Job
       tower_job_launch:
-        tower_host: "{{ AWX_HOSTNAME }}"
-        tower_username: "{{ AWX_USERNAME }}"
-        tower_password: "{{ AWX_PASSWORD }}"
+        # tower_host: "{{ AWX_HOSTNAME }}"
+        # tower_username: "{{ AWX_USERNAME }}"
+        # tower_password: "{{ AWX_PASSWORD }}"
         job_template: "{{ AWX_JOB_TEMPLATE_NAME }}"
-        inventory: "Cisco Lab Inventory"
-        credential: "Demo Credential"
+        inventory: "ANSIBLE-TOWER-INSTANCES"
+        credential: "Lab AWX Instance Credentials"
 
       register: job
+    
+    - name: Print Job Details
+      debug:
+        msg: Job Details "{{ job }}"
 
     - name: Wait for job max 30s
       tower_job_wait:
-        tower_host: "{{ AWX_HOSTNAME }}"
-        tower_username: "{{ AWX_USERNAME }}"
-        tower_password: "{{ AWX_PASSWORD }}"
+        # tower_host: "{{ AWX_HOSTNAME }}"
+        # tower_username: "{{ AWX_USERNAME }}"
+        # tower_password: "{{ AWX_PASSWORD }}"
         job_id: job.id
         timeout: 30
 ...
