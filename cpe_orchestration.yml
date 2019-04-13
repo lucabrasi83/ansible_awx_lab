@@ -12,7 +12,7 @@
 
     - name: Print JSON
       debug:
-              msg: "{{inventory_hostname}} Version {{ansible_net_version}}"
+              msg: "{{inventory_hostname}} has version {{ansible_net_version}}"
 
    
    
