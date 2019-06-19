@@ -1,6 +1,7 @@
 ---
 - name: Launch Job From Ansible Tower to AWX
   hosts: localhost
+  connection: local
   gather_facts: false
   tasks:
 
