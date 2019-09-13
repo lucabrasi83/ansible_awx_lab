@@ -1,0 +1,44 @@
+netconf-yang
+!
+telemetry ietf subscription 10
+ encoding encode-kvgpb
+ filter xpath /interfaces-ios-xe-oper:interfaces/interface
+ source-address {{ hostvars[inventory_hostname].ansible_host }}
+ stream yang-push
+ update-policy periodic 1000
+ receiver ip address {{ COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
+telemetry ietf subscription 20
+ encoding encode-kvgpb
+ filter xpath /process-cpu-ios-xe-oper:cpu-usage/cpu-utilization
+ source-address {{ hostvars[inventory_hostname].ansible_host }}
+ stream yang-push
+ update-policy periodic 1000
+ receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
+telemetry ietf subscription 30
+ encoding encode-kvgpb
+ filter xpath /memory-ios-xe-oper:memory-statistics/memory-statistic
+ source-address {{ hostvars[inventory_hostname].ansible_host }}
+ stream yang-push
+ update-policy periodic 1000
+ receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
+telemetry ietf subscription 40
+ encoding encode-kvgpb
+ filter xpath /process-memory-ios-xe-oper:memory-usage-processes/memory-usage-process
+ source-address {{ hostvars[inventory_hostname].ansible_host }}
+ stream yang-push
+ update-policy periodic 1000
+ receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
+telemetry ietf subscription 50
+ encoding encode-kvgpb
+ filter xpath /bgp-ios-xe-oper:bgp-state-data/address-families/address-family
+ source-address {{ hostvars[inventory_hostname].ansible_host }}
+ stream yang-push
+ update-policy periodic 1000
+ receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
+telemetry ietf subscription 60
+ encoding encode-kvgpb
+ filter xpath /eigrp-ios-xe-oper:eigrp-oper-data/eigrp-instance/eigrp-interface/eigrp-nbr
+ source-address {{ hostvars[inventory_hostname].ansible_host }}
+ stream yang-push
+ update-policy periodic 1000
+ receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp

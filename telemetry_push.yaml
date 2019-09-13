@@ -1,0 +1,14 @@
+---
+- name: Configure Telemetry
+  hosts: TELEMETRY_CPE
+  gather_facts: false
+  vars:
+    COLLECTOR_IP_ADDRESS: 100.64.0.10
+    COLLECTOR_TCP_PORT: 30001
+
+  tasks:
+    - name: Configure Telemetry Subscriptions
+      ios_config:
+        replace: line
+        save_when: changed
+        src: telemetry_cisco_template.j2
