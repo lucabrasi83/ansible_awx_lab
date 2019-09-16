@@ -1,5 +1,9 @@
 netconf-yang
 !
+{% for i in [10,20,30,40,50,60] %}
+no telemetry ietf subscription {{ i }}
+{% endfor %}
+!
 telemetry ietf subscription 10
  encoding encode-kvgpb
  filter xpath /interfaces-ios-xe-oper:interfaces/interface
