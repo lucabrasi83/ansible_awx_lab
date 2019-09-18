@@ -9,6 +9,7 @@
   tasks:
     - name: Configure Telemetry Subscriptions
       ios_config:
+        match: none
         replace: line
         save_when: changed
         src: telemetry_cisco_template.j2
