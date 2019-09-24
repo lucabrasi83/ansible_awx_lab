@@ -20,7 +20,7 @@ telemetry ietf subscription 20
  filter xpath /process-cpu-ios-xe-oper:cpu-usage/cpu-utilization
  source-address {{ hostvars[inventory_hostname].ansible_host }}
  stream yang-push
- update-policy periodic 1000
+ update-policy periodic 3000
  receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
  !
  ! Memory Statistic subscription
@@ -29,7 +29,7 @@ telemetry ietf subscription 30
  filter xpath /memory-ios-xe-oper:memory-statistics/memory-statistic
  source-address {{ hostvars[inventory_hostname].ansible_host }}
  stream yang-push
- update-policy periodic 2000
+ update-policy periodic 3000
  receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
  !
  ! Memory Usage processes subscription
@@ -38,7 +38,7 @@ telemetry ietf subscription 40
  filter xpath /process-memory-ios-xe-oper:memory-usage-processes/memory-usage-process
  source-address {{ hostvars[inventory_hostname].ansible_host }}
  stream yang-push
- update-policy periodic 2000
+ update-policy periodic 6000
  receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
  !
  ! BGP Address Family subscription
