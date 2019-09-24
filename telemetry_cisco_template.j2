@@ -1,6 +1,6 @@
 netconf-yang
 !
-{% for i in [10,20,30,40,50,60] %}
+{% for i in [10,20,30,40,50,60,70,80,90] %}
 no telemetry ietf subscription {{ i }}
 {% endfor %}
 !
@@ -57,4 +57,31 @@ telemetry ietf subscription 60
  source-address {{ hostvars[inventory_hostname].ansible_host }}
  stream yang-push
  update-policy periodic 500
+ receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
+ !
+ ! OSPF Adjacency Subscription
+ telemetry ietf subscription 70
+ encoding encode-kvgpb
+ filter xpath /ospf-ios-xe-oper:ospf-oper-data/ospfv2-instance/ospfv2-area/ospfv2-interface/ospfv2-neighbor
+ source-address {{ hostvars[inventory_hostname].ansible_host }}
+ stream yang-push
+ update-policy periodic 500
+ receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
+ !
+ ! IP SLA Config
+ telemetry ietf subscription 80
+ encoding encode-kvgpb
+ filter xpath /ios:native/ios:ip/ios-sla:sla/ios-sla:entry
+ source-address {{ hostvars[inventory_hostname].ansible_host }}
+ stream yang-push
+ update-policy periodic 30000
+ receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
+ !
+ ! IP SLA Metrics
+telemetry ietf subscription 90
+ encoding encode-kvgpb
+ filter xpath /ip-sla-ios-xe-oper:ip-sla-stats/sla-oper-entry
+ source-address {{ hostvars[inventory_hostname].ansible_host }}
+ stream yang-push
+ update-policy periodic 6000
  receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
