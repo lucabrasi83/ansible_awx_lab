@@ -20,7 +20,7 @@ telemetry ietf subscription 20
  filter xpath /process-cpu-ios-xe-oper:cpu-usage/cpu-utilization
  source-address {{ hostvars[inventory_hostname].ansible_host }}
  stream yang-push
- update-policy periodic 3000
+ update-policy periodic 1000
  receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
  !
  ! Memory Statistic subscription
