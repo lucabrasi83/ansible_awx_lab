@@ -85,3 +85,21 @@ telemetry ietf subscription 90
  stream yang-push
  update-policy periodic 6000
  receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
+ !
+ ! Device Hardware Info
+ telemetry ietf subscription 100
+ encoding encode-kvgpb
+ filter xpath /device-hardware-xe-oper:device-hardware-data
+ source-address {{ hostvars[inventory_hostname].ansible_host }}
+ stream yang-push
+ update-policy periodic 60000
+ receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
+ !
+ ! Device License Info
+ telemetry ietf subscription 110
+ encoding encode-kvgpb
+ filter xpath /ios:native/ios:license
+ source-address {{ hostvars[inventory_hostname].ansible_host }}
+ stream yang-push
+ update-policy periodic 60000
+ receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
