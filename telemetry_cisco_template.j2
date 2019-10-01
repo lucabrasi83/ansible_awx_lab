@@ -155,5 +155,5 @@ telemetry ietf subscription 90
  filter xpath /flow-monitor-ios-xe-oper:flow-monitors/flow-monitor[name='TELEMETRY-FNF-MONITOR']
  source-address {{ hostvars[inventory_hostname].ansible_host }}
  stream yang-push
- update-policy periodic 1000
+ update-policy periodic 3000
  receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
