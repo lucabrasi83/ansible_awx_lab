@@ -1,6 +1,48 @@
+! Enable Dummy FNF for top talker collection
+flow record TELEMETRY-FNF-RECORD
+ match ipv4 source address
+ match ipv4 destination address
+ match interface input
+ match transport destination-port
+ match transport source-port
+ match routing vrf input
+ match ipv4 protocol
+ match routing is-multicast
+ match ipv4 tos
+ collect counter bytes
+ collect counter packets
+ collect interface output
+!
+!
+flow exporter TELEMETRY-FNF-EXPORT
+ description FNF v9
+ destination 100.64.99.99
+ source {{ hostvars[inventory_hostname].ansible_host }}
+ transport udp 9996
+ option interface-table
+ option application-table
+!
+!
+flow monitor TELEMETRY-FNF-MONITOR
+ exporter TELEMETRY-FNF-EXPORT
+ cache timeout active 300
+ record TELEMETRY-FNF-RECORD
+!
+!
+ip route 100.64.99.99 255.255.255.255 Null0
+!
+{% if hostvars[inventory_hostname].ansible_net_model == "CSR1000V" %}
+interface GigabitEthernet1
+{% else %}
+interface GigabitEthernet0/0/0
+{% endif %}
+  ip flow monitor TELEMETRY-FNF-MONITOR input
+  ip flow monitor TELEMETRY-FNF-MONITOR output
+  ip nbar protocol-discovery ipv4
+
 netconf-yang
 !
-{% for i in [10,20,30,40,50,60,70,80,90] %}
+{% for i in [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120] %}
 no telemetry ietf subscription {{ i }}
 {% endfor %}
 !
@@ -102,4 +144,13 @@ telemetry ietf subscription 90
  source-address {{ hostvars[inventory_hostname].ansible_host }}
  stream yang-push
  update-policy periodic 60000
+ receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
+ !
+ ! Flexible Netflow Talkers
+ telemetry ietf subscription 120
+ encoding encode-kvgpb
+ filter xpath /flow-monitor-ios-xe-oper:flow-monitors/flow-monitor
+ source-address {{ hostvars[inventory_hostname].ansible_host }}
+ stream yang-push
+ update-policy periodic 3000
  receiver ip address {{COLLECTOR_IP_ADDRESS }} {{ COLLECTOR_TCP_PORT }} protocol grpc-tcp
