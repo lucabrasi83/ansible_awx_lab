@@ -19,7 +19,7 @@ flow exporter TELEMETRY-FNF-EXPORT
 {% if hostvars[inventory_hostname].ansible_net_model == "CSR1000V" %}
   source GigabitEthernet1
 {% else %}
-  source GigabitEthernet0/0/0
+  source GigabitEthernet0/0/0.778
 {% endif %}
   transport udp 9996
   option interface-table
@@ -37,7 +37,7 @@ ip route 100.64.99.99 255.255.255.255 Null0
 {% if hostvars[inventory_hostname].ansible_net_model == "CSR1000V" %}
 interface GigabitEthernet1
 {% else %}
-interface GigabitEthernet0/0/0
+interface GigabitEthernet0/0/0.778
 {% endif %}
  ip flow monitor TELEMETRY-FNF-MONITOR input
  ip flow monitor TELEMETRY-FNF-MONITOR output
@@ -152,7 +152,7 @@ telemetry ietf subscription 90
  ! Flexible Netflow Talkers
  telemetry ietf subscription 120
  encoding encode-kvgpb
- filter xpath /flow-monitor-ios-xe-oper:flow-monitors/flow-monitor
+ filter xpath /flow-monitor-ios-xe-oper:flow-monitors/flow-monitor[name='TELEMETRY-FNF-MONITOR']
  source-address {{ hostvars[inventory_hostname].ansible_host }}
  stream yang-push
  update-policy periodic 3000
