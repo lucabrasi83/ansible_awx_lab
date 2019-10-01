@@ -1,3 +1,11 @@
+{% if hostvars[inventory_hostname].ansible_net_model == "CSR1000V" %}
+interface GigabitEthernet1
+{% else %}
+interface GigabitEthernet0/0/0.778
+{% endif %}
+ no ip flow monitor TELEMETRY-FNF-MONITOR input
+ no ip flow monitor TELEMETRY-FNF-MONITOR output
+!
 ! Enable Dummy FNF for top talker collection
 flow record TELEMETRY-FNF-RECORD
  match ipv4 source address
@@ -28,7 +36,7 @@ flow exporter TELEMETRY-FNF-EXPORT
 !
 flow monitor TELEMETRY-FNF-MONITOR
  exporter TELEMETRY-FNF-EXPORT
- cache timeout active 300
+ cache timeout active 600
  record TELEMETRY-FNF-RECORD
 !
 !
