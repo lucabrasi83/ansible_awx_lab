@@ -15,12 +15,15 @@ flow record TELEMETRY-FNF-RECORD
 !
 !
 flow exporter TELEMETRY-FNF-EXPORT
- description FNF v9
- destination 100.64.99.99
- source {{ hostvars[inventory_hostname].ansible_host }}
- transport udp 9996
- option interface-table
- option application-table
+  destination 100.64.99.99
+{% if hostvars[inventory_hostname].ansible_net_model == "CSR1000V" %}
+  source GigabitEthernet1
+{% else %}
+  source GigabitEthernet0/0/0
+{% endif %}
+  transport udp 9996
+  option interface-table
+  option application-table
 !
 !
 flow monitor TELEMETRY-FNF-MONITOR
@@ -36,9 +39,9 @@ interface GigabitEthernet1
 {% else %}
 interface GigabitEthernet0/0/0
 {% endif %}
-  ip flow monitor TELEMETRY-FNF-MONITOR input
-  ip flow monitor TELEMETRY-FNF-MONITOR output
-  ip nbar protocol-discovery ipv4
+ ip flow monitor TELEMETRY-FNF-MONITOR input
+ ip flow monitor TELEMETRY-FNF-MONITOR output
+ ip nbar protocol-discovery ipv4
 
 netconf-yang
 !
