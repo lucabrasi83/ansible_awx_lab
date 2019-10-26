@@ -1,0 +1,11 @@
+---
+- name: Reload Routers
+  hosts: TELEMETRY_CPE
+  gather_facts: false
+
+  tasks:
+    - name: Reload Routers
+      ios_command:
+        commands:
+          - "wr"
+          - "reload\n"
