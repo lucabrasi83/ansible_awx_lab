@@ -151,7 +151,7 @@ telemetry ietf subscription 90
  ! Device License Info
  telemetry ietf subscription 110
  encoding encode-kvgpb
- filter xpath /ios:native/ios:license
+ filter xpath /ios:native/license
  source-address {{ hostvars[inventory_hostname].ansible_host }}
  stream yang-push
  update-policy periodic 60000
