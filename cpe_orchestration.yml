@@ -2,7 +2,8 @@
 - name: Gather Cisco IOS/IOSXE Inventory Facts
   gather_facts: false
   hosts: all
-  connection: local
+  ansible_network_provider: ansible-network.cisco_ios
+  ansible_connection: network_cli
   tasks:
   
     - name: Collect Facts
