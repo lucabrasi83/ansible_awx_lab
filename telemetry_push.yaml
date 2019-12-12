@@ -3,7 +3,7 @@
   hosts: TELEMETRY_CPE
   gather_facts: false
   vars:
-    COLLECTOR_IP_ADDRESS: 100.64.0.10
+    COLLECTOR_IP_ADDRESS: 100.64.0.2
     COLLECTOR_TCP_PORT: 30001
 
   tasks:
