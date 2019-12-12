@@ -2,6 +2,7 @@
 - name: Gather Cisco IOS/IOSXE Inventory Facts
   gather_facts: false
   hosts: all
+  connection: local
   tasks:
   
     - name: Collect Facts

@@ -1,6 +1,7 @@
 ---
 - name: Reload Routers
   hosts: TELEMETRY_CPE
+  connection: local
   gather_facts: false
 
   tasks:
