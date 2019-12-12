@@ -2,7 +2,6 @@
 - name: Configure Telemetry
   hosts: TELEMETRY_CPE
   gather_facts: false
-  connection: local
   vars:
     COLLECTOR_IP_ADDRESS: 100.64.0.2
     COLLECTOR_TCP_PORT: 30001
